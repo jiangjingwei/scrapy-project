@@ -24,9 +24,10 @@ class JobbolearticlePipeline(object):
 class ArticleImagePipeline(ImagesPipeline):
 
     def item_completed(self, results, item, info):
-        for ok, value in results:
-            image_file_path = value['path']
-        item['image_path'] = image_file_path
+        if 'image_url' in item:
+            for ok, value in results:
+                image_file_path = value['path']
+            item['image_path'] = image_file_path
 
         return item
 

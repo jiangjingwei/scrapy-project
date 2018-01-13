@@ -6,7 +6,7 @@ import re
 import datetime
 from scrapy.loader import ItemLoader
 
-from JobBoLeArticle.items import JobbolearticleItem
+from JobBoLeArticle.items import JobbolearticleItem, ArticleItemLoader
 
 
 class ArticleSpider(scrapy.Spider):
@@ -75,13 +75,13 @@ class ArticleSpider(scrapy.Spider):
         # item['content'] = response.css(".entry").extract_first("")
 
         # 通过itemloader加载item  item_loader.add_xpath()  item_loader.add_value()
-        item_loader = ItemLoader(item=JobbolearticleItem(), response=response)
+        item_loader = ArticleItemLoader(item=JobbolearticleItem(), response=response)
         item_loader.add_css('title', '.entry-header h1::text')
         item_loader.add_value('url', response.url)
         item_loader.add_value('url_object_id', get_md5(response.url))
         item_loader.add_css('create_date', '.entry-meta p::text')
         item_loader.add_value('image_url', [response.meta.get('image_url', '')])
-        item_loader.add_css('vote_nums', 'vote_nums')
+        item_loader.add_css('vote_nums', '.vote-post-up h10::text')
         item_loader.add_css('fav_nums', '.post-adds .bookmark-btn::text')
         item_loader.add_css('comment_nums', ".post-adds a[href='#article-comment'] span::text")
         item_loader.add_css('tags', '.entry-meta a::text')

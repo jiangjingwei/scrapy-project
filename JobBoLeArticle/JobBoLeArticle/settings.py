@@ -69,6 +69,7 @@ ITEM_PIPELINES = {
 
     # 'JobBoLeArticle.pipelines.JobbolearticlePipeline': 300,
     # 'JobBoLeArticle.pipelines.JsonWithEncodingPipeline': 300,
+    # 'JobBoLeArticle.pipelines.JsonExporterPipeline': 300,
     # 'JobBoLeArticle.pipelines.MysqlClientPipeline': 300,
     'scrapy.pipelines.images.ImagesPipeline': 100,
     'JobBoLeArticle.pipelines.ArticleImagePipeline': 200,
